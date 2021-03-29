@@ -1,6 +1,8 @@
 const express = require("express");
+const cors = require('cors');
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
+const fs = require('fs');
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const postRoutes = require('./routes/post');
@@ -15,6 +17,19 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(expressValidator());
 app.use(cookieParser());
+console.log("----------------------------In appasss.js")
+app.use(cors());
+app.get("/", (req, res) => {
+    fs.readFile('Docs/apiDocs.json', (err, data) => {
+        if(err) {
+            res.status(400).json({
+                error: err
+            })
+        }
+        const docs = JSON.parse(data);
+        res.json(docs);
+    })
+})
 app.use("/", postRoutes);
 app.use("/", signUp);
 app.use("/", getUsers);
