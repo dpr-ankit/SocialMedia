@@ -11,7 +11,7 @@ exports.signup = async(req, res) => {
         });
         const user = await new User(req.body);
         await user.save();
-        res.status(200).json({message: user});
+        res.status(200).json({message: "You are signedup successfully!"});
 }
 exports.signin = (req, res) => {
     const {email, password} = req.body;

@@ -17,7 +17,6 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(expressValidator());
 app.use(cookieParser());
-console.log("----------------------------In appasss.js")
 app.use(cors());
 app.get("/", (req, res) => {
     fs.readFile('Docs/apiDocs.json', (err, data) => {
